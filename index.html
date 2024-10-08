@@ -1,0 +1,152 @@
+<!DOCTYPE html>
+
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+
+    <title>practice-todoapp</title>
+
+    <style>
+      body {
+        font-family: Arial, sans-serif;
+
+        display: flex;
+
+        justify-content: center;
+
+        align-items: flex-start;
+
+        background-color: #f0f0f0;
+
+        margin: 0;
+      }
+
+      .completed {
+        text-decoration: line-through;
+
+        color: grey;
+      }
+
+      .container {
+        display: flex;
+
+        width: 80%;
+
+        background-color: white;
+
+        border-radius: 8px;
+      }
+
+      #task-list {
+        flex: 1;
+
+        padding: 20px;
+
+        border-right: 1px solid #ccc;
+      }
+
+      .task-form {
+        flex: 1;
+
+        padding: 20px;
+      }
+
+      h2 {
+        margin-bottom: 20px;
+      }
+
+      ul {
+        padding: 0;
+
+        list-style: none;
+      }
+
+      li {
+        display: flex;
+
+        justify-content: space-between;
+
+        align-items: center;
+
+        padding: 10px;
+
+        border-bottom: 1px solid #ccc;
+      }
+
+      button {
+        cursor: pointer;
+
+        background-color: rgb(90, 215, 243);
+
+        border: none;
+
+        padding: 5px 10px;
+      }
+
+      .delete {
+        background-color: rgb(87, 241, 84);
+      }
+
+      input {
+        width: calc(100% - 22px);
+
+        padding: 10px;
+
+        margin-bottom: 10px;
+      }
+    </style>
+  </head>
+
+  <body>
+    <div class="container">
+      <div id="task-list">
+        <h2>Task List</h2>
+
+        <ul id="list"></ul>
+      </div>
+
+      <div class="task-form">
+        <h2>Enter Task</h2>
+
+        <form id="task-form">
+          <input type="text" id="text-input" placeholder="Enter task here" />
+
+          <button id="submit">Submit</button>
+
+          <ul id="output"></ul>
+        </form>
+      </div>
+    </div>
+
+    <script>
+      document
+        .getElementById("task-form")
+        .addEventListener("submit", function (event) {
+          event.preventDefault();
+
+          const taskinput = document.getElementById("text-input");
+
+          const value = taskinput.value;
+
+          const list = document.createElement("li");
+
+          list.innerHTML = `<span>${value}</span><input type="checkbox" class="complete"><button class="delete">x</button>`;
+          document.getElementById("list").appendChild(list);
+
+          taskinput.value = "";
+
+          list
+            .querySelector(".complete")
+            .addEventListener("click", function () {
+              list.querySelector("span").classList.toggle("completed");
+            });
+
+          list.querySelector(".delete").addEventListener("click", function () {
+            list.remove();
+          });
+        });
+    </script>
+  </body>
+</html>
